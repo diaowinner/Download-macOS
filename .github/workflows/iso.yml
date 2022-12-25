@@ -169,18 +169,18 @@ jobs:
 
       # Ventura Beta
 
-      - if: github.event.inputs.macos_version == 'Ventura Beta v13.0'
+      - if: github.event.inputs.macos_version == 'Ventura v13.1'
         name: Generate Ventura Beta ISO
         run: |
           sudo hdiutil create -o /tmp/Ventura -size 16384m -volname Ventura -layout SPUD -fs HFS+J
           sudo hdiutil attach /tmp/Ventura.dmg -noverify -mountpoint /Volumes/Ventura
           sleep 10
           sudo /Applications/Install\ macOS\ Ventura\ beta.app/Contents/Resources/createinstallmedia --volume /Volumes/Ventura --nointeraction
-          hdiutil eject -force /Volumes/Install\ macOS\ Ventura\ Beta
+          hdiutil eject -force /Volumes/Install\ macOS\ Ventura
           hdiutil convert /tmp/Ventura.dmg -format UDTO -o ~/Desktop/Ventura
           mv -v ~/Desktop/Ventura.cdr ~/Desktop/Ventura.iso
           sudo rm -fv /tmp/Ventura.dmg
-      - if: github.event.inputs.macos_version == 'Ventura Beta v13.0'
+      - if: github.event.inputs.macos_version == 'Ventura v13.1'
         name: Upload Ventura Beta ISO
         uses: actions/upload-artifact@v3.1.0
         with:
